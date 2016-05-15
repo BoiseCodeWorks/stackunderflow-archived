@@ -12,3 +12,17 @@
 	color: aliceblue;
 	background-color: #222;
 }
+input {
+	width: 10px;
+}
+
+.special{
+	
+	text-align:center;
+}
+
+.clock{
+	
+	background: black;
+	
+}
