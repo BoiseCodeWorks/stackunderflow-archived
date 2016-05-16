@@ -1,11 +1,107 @@
-<h1>A SINGLE QUESTION VIEW</h1>
+<!--<div class="jumbotron">
+    <center>
+        <h1>Comment</h1></center>-->
+<!--</div>{{member.$id}}-->
 
-<p>If we are logged in we should have a member obj {{member}}</p>
 
-<h3>Question Rules</h3>
-<p>A member must be logged in to cast votes, ask questions, add responses, or add comments</p>
-<p>A member may not upvote their own questions/answers/comments</p>
-<p>Only the member who posted the the questions can mark an answer as the correct answer</p>
-<p>Only the member who posted the the questions/answers/comments can edit their content</p>
-<p>A member may only upvote the questions/answers/comments once.</p>
-<p>A member can change their vote to either up or down but may not vote both ways.</p>
+<!--<p>If we are logged in we should have a member obj</p>-->
+
+<!--<h3>Comment Rules</h3>
+<p>A member must be logged in to cast votes, ask Comments, add responses, or add comments</p>
+<p>A member may not upvote their own Comments/answers/comments</p>
+<p>Only the member who posted the the Comments can mark an answer as the correct answer</p>
+<p>Only the member who posted the the Comments/answers/comments can edit their content</p>
+<p>A member may only upvote the Comments/answers/comments once.</p>
+<p>A member can change their vote to either up or down but may not vote both ways.</p>-->
+
+<div id="comments" class="panel panel-default">
+    <div id="comment-title" class="panel-title panel-default">
+        <h2>Make a Comment About This Question</h2>
+    </div>
+    <div class="Question">
+        <ul class="list-group">
+            <li class="list-group-item">
+                <h3>Question</h3> Title: {{question.title}}<br> Body: {{question.body}}<br> Author: {{member.username}}
+            </li>
+        </ul>
+    </div>
+    <form class="form form-inline" ng-submit="addComment(newComment)">
+        <div class="form-group">
+            <label for="title">Comment Title:</label>
+            <input class="form-control" ng-model="newComment.title" type="text">
+        </div>
+        <div class="form-group">
+            <label for="body">Description:</label>
+            <input class="form-control" ng-model="newComment.body" type="text">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    <!--<div id="comment-enter">
+        <div class="panel-body">
+        </div>
+    </div>
+</div>-->
+
+
+
+    <div id="ScrollStyle" class="row-c">
+        <div ng-repeat="comment in comments">
+            <ul class="list-group container">
+                <li class="list-group-item row">
+                    <div class="col-sm-4">
+                        Comment Title: {{comment.title}}
+                        <br> Comment Body: {{comment.body}}
+                        <br> Comment Author: {{member.username}}
+                    </div>
+                    <div id="comment-field" class="col-sm-4 col-xs-offset-1">
+                        <a class="glyphicon glyphicon-arrow-up" ng-click="vote(comment, 1)"></a>
+                        <span>{{comment.voteCount}}</span>
+                        <a class="glyphicon glyphicon-arrow-down" ng-click="vote(comment, -1)"></a>
+                        <!--<a ui-sref="question.comments({id:question.$id})" class="btn">Respond</a>-->
+                        <input ng-model="newComment.checkbox" type="checkbox">
+                    </div>
+                    <div class="col-sm-2">
+                        <button class="btn btn-primary" ng-click="show = !show">Response</button>
+                    </div>
+                </li>
+                <li>
+                    <div class="row" ng-show="show">
+
+                        <form class="form form-inline" ng-submit="addResponseToComment(newResponse, comment)">
+                            <div class="form-group col-sm-5">
+                                <label style="color:white" for="title">Title:</label>
+                                <input class="form-control" ng-model="newResponse.title" type="text">
+                            </div>
+                            <div class="form-group col-sm-5">
+                                <label style="color:white" for="body">Description:</label>
+                                <input class="form-control" ng-model="newResponse.body" type="text">
+                            </div>
+                            <div class= "btn btn-group col-sm-2">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <button type="reset" class="btn btn-danger">Reset</button>
+                                <br>
+                            </div>
+                        </form>
+                    </div>
+                </li>
+                <li>
+                    <div class="responses-box" ng-show="show">
+                        <div class="ScrollStyle2 row">
+                        <div ng-repeat="response in comment.responses">
+                            <ul class="list-group">
+                                <li class="list-group-item row">
+                                    <div class="col-sm-10">
+                                        Title: {{response.title}}
+                                        <br> Body: {{response.body}}
+                                        <br> Author: {{member.username}}
+
+                                    </div>
+                                </li>
+                            </ul>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
